@@ -1,0 +1,122 @@
+[gd_scene load_steps=50 format=2]
+
+[ext_resource path="res://default-player.gd" type="Script" id=1]
+[ext_resource path="res://assets/temp-character/CharacterRunEast/CharacterRunEast1.png" type="Texture" id=2]
+[ext_resource path="res://assets/temp-character/CharacterRunEast/CharacterRunEast2.png" type="Texture" id=3]
+[ext_resource path="res://assets/temp-character/CharacterRunEast/CharacterRunEast3.png" type="Texture" id=4]
+[ext_resource path="res://assets/temp-character/CharacterRunEast/CharacterRunEast4.png" type="Texture" id=5]
+[ext_resource path="res://assets/temp-character/CharacterRunEast/CharacterRunEast5.png" type="Texture" id=6]
+[ext_resource path="res://assets/temp-character/CharacterIdleEast/CharacterIdleEast1.png" type="Texture" id=7]
+[ext_resource path="res://assets/temp-character/CharacterIdleEast/CharacterIdleEast2.png" type="Texture" id=8]
+[ext_resource path="res://assets/temp-character/CharacterIdleEast/CharacterIdleEast3.png" type="Texture" id=9]
+[ext_resource path="res://assets/temp-character/CharacterIdleEast/CharacterIdleEast4.png" type="Texture" id=10]
+[ext_resource path="res://assets/temp-character/CharacterIdleEast/CharacterIdleEast5.png" type="Texture" id=11]
+[ext_resource path="res://assets/temp-character/CharacterIdleWest/CharacterIdleWest1.png" type="Texture" id=12]
+[ext_resource path="res://assets/temp-character/CharacterIdleWest/CharacterIdleWest2.png" type="Texture" id=13]
+[ext_resource path="res://assets/temp-character/CharacterIdleWest/CharacterIdleWest3.png" type="Texture" id=14]
+[ext_resource path="res://assets/temp-character/CharacterIdleWest/CharacterIdleWest4.png" type="Texture" id=15]
+[ext_resource path="res://assets/temp-character/CharacterIdleWest/CharacterIdleWest5.png" type="Texture" id=16]
+[ext_resource path="res://assets/temp-character/CharacterRunNorth/CharacterRunNorth1.png" type="Texture" id=17]
+[ext_resource path="res://assets/temp-character/CharacterRunNorth/CharacterRunNorth2.png" type="Texture" id=18]
+[ext_resource path="res://assets/temp-character/CharacterRunNorth/CharacterRunNorth3.png" type="Texture" id=19]
+[ext_resource path="res://assets/temp-character/CharacterRunNorth/CharacterRunNorth4.png" type="Texture" id=20]
+[ext_resource path="res://assets/temp-character/CharacterRunNorth/CharacterRunNorth5.png" type="Texture" id=21]
+[ext_resource path="res://assets/temp-character/CharacterRunNorth/CharacterRunNorth6.png" type="Texture" id=22]
+[ext_resource path="res://assets/temp-character/CharacterRunNorth/CharacterRunNorth7.png" type="Texture" id=23]
+[ext_resource path="res://assets/temp-character/CharacterRunNorth/CharacterRunNorth8.png" type="Texture" id=24]
+[ext_resource path="res://assets/temp-character/CharacterIdleSouth/CharacterIdleSouth1.png" type="Texture" id=25]
+[ext_resource path="res://assets/temp-character/CharacterIdleSouth/CharacterIdleSouth2.png" type="Texture" id=26]
+[ext_resource path="res://assets/temp-character/CharacterIdleSouth/CharacterIdleSouth3.png" type="Texture" id=27]
+[ext_resource path="res://assets/temp-character/CharacterIdleSouth/CharacterIdleSouth4.png" type="Texture" id=28]
+[ext_resource path="res://assets/temp-character/CharacterIdleSouth/CharacterIdleSouth5.png" type="Texture" id=29]
+[ext_resource path="res://assets/temp-character/CharacterIdleNorth/CharacterIdleNorth1.png" type="Texture" id=30]
+[ext_resource path="res://assets/temp-character/CharacterIdleNorth/CharacterIdleNorth2.png" type="Texture" id=31]
+[ext_resource path="res://assets/temp-character/CharacterIdleNorth/CharacterIdleNorth3.png" type="Texture" id=32]
+[ext_resource path="res://assets/temp-character/CharacterIdleNorth/CharacterIdleNorth4.png" type="Texture" id=33]
+[ext_resource path="res://assets/temp-character/CharacterIdleNorth/CharacterIdleNorth5.png" type="Texture" id=34]
+[ext_resource path="res://assets/temp-character/CharacterRunWest/CharacterRunWest1.png" type="Texture" id=35]
+[ext_resource path="res://assets/temp-character/CharacterRunWest/CharacterRunWest2.png" type="Texture" id=36]
+[ext_resource path="res://assets/temp-character/CharacterRunWest/CharacterRunWest3.png" type="Texture" id=37]
+[ext_resource path="res://assets/temp-character/CharacterRunWest/CharacterRunWest4.png" type="Texture" id=38]
+[ext_resource path="res://assets/temp-character/CharacterRunWest/CharacterRunWest5.png" type="Texture" id=39]
+[ext_resource path="res://assets/temp-character/CharacterRunSouth/CharacterRunSouth1.png" type="Texture" id=40]
+[ext_resource path="res://assets/temp-character/CharacterRunSouth/CharacterRunSouth2.png" type="Texture" id=41]
+[ext_resource path="res://assets/temp-character/CharacterRunSouth/CharacterRunSouth3.png" type="Texture" id=42]
+[ext_resource path="res://assets/temp-character/CharacterRunSouth/CharacterRunSouth4.png" type="Texture" id=43]
+[ext_resource path="res://assets/temp-character/CharacterRunSouth/CharacterRunSouth5.png" type="Texture" id=44]
+[ext_resource path="res://assets/temp-character/CharacterRunSouth/CharacterRunSouth6.png" type="Texture" id=45]
+[ext_resource path="res://assets/temp-character/CharacterRunSouth/CharacterRunSouth7.png" type="Texture" id=46]
+[ext_resource path="res://assets/temp-character/CharacterRunSouth/CharacterRunSouth8.png" type="Texture" id=47]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "run-east",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "idle-east",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "idle-west",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "run-north",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ) ],
+"loop": true,
+"name": "idle-south",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ) ],
+"loop": true,
+"name": "idle-north",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ) ],
+"loop": true,
+"name": "run-west",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ) ],
+"loop": true,
+"name": "run-south",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 31.8618, 64.1455 )
+
+[node name="Player" type="KinematicBody2D" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+playerSpeed = 10
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
+
+frames = SubResource( 1 )
+animation = "idle-south"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 0, 36.2041 )
+shape = SubResource( 2 )
+
+
