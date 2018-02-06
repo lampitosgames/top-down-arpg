@@ -7,10 +7,10 @@ path="res://.import/template.tmx-c33a147e2f043a752afefe11236cccc6.scn"
 [deps]
 
 source_file="res://tilesets/template.tmx"
-source_md5="bff9287ef71195aa208b8c75f25863fd"
+source_md5="8eb619a0e4d9aa9097fdce373c8df87d"
 
 dest_files=[ "res://.import/template.tmx-c33a147e2f043a752afefe11236cccc6.scn" ]
-dest_md5="b01cda6636a8d10738db0bf5009cf7c2"
+dest_md5="46083b558b2e4b6e76a7b845e294db73"
 
 [params]
 
