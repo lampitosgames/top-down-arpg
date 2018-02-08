@@ -1,22 +1,51 @@
-extends KinematicBody2D
+extends RigidBody2D
 
-export var playerSpeed = 500
+#Maximum player speed without modifiers
+export var playerSpeed = 300
+#Player mass.  Lower means less inertia
+export var playerMass = 10
+#When the player stops inputting directional movement, how much linear damping is applied
+export var stoppedLinearDamp = 40
+#Force magnitude for movement.  Lower means more time to change
+export var dirForceMag = 400
 
+#Emitted signals
 signal player_update_move(dirNorm, dirPriority)
+signal player_move(globalCoords)
 
 #Move direction
 var moveDir = Vector2(0, 0)
 #North=0, East=1, South=2, West=3
 var moveDirPriority = [false, false, false, false]
 
+#Start
 func _ready():
 	set_process_input(true)
-	emit_signal("player_update_move", moveDir, moveDirPriority)
+	set_mass(playerMass)
+	set_friction(0)
+	emit_signal("player_move", position)
 
+#Update
 func _physics_process(delta):
-	var velocity = moveDir * playerSpeed;
-	move_and_slide(velocity, Vector2(0,0))
-	
+	#Clamp moveDir.  Controllers sometimes go over the given range of 0-1, so we need to cap the movement speeds
+	moveDir = moveDir.clamped(1)
+	#If player is stopped
+	if (moveDir.length_squared() == 0):
+		set_linear_damp(stoppedLinearDamp)
+		set_applied_force(Vector2(0,0))
+	#Else, they are moving
+	else:
+		#Clear linear damp
+		set_linear_damp(0)
+		#ALWAYS FIRST
+		#Calculate a move force and apply it
+		var moveForce = moveDir * dirForceMag * dirForceMag
+		set_applied_force(moveForce)
+		#Clamp player's linear velocity
+		set_linear_velocity(get_linear_velocity().clamped(playerSpeed * moveDir.length()))
+		emit_signal("player_move", position)
+
+#Handle input events.  Mostly used for movement, other controls are handled elsewhere
 func _input(ev):
 	#Keyboard input handling
 	if ev is InputEventKey:

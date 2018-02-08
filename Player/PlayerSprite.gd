@@ -1,9 +1,9 @@
 extends AnimatedSprite
 
-export var northRunSpeed = 15
-export var eastRunSpeed = 13
-export var southRunSpeed = 15
-export var westRunSpeed = 13
+export var northRunSpeed = 16
+export var eastRunSpeed = 14
+export var southRunSpeed = 16
+export var westRunSpeed = 14
 
 var lastMoveDir = 2
 

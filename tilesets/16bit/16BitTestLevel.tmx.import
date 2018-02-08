@@ -7,10 +7,10 @@ path="res://.import/16BitTestLevel.tmx-3e0c95b8dffb5169ec680b67e311b483.scn"
 [deps]
 
 source_file="res://tilesets/16bit/16BitTestLevel.tmx"
-source_md5="be7363566e2ebcacbf6ee8a602c484fd"
+source_md5="5737bccc7b62544b2e41a26d122dab55"
 
 dest_files=[ "res://.import/16BitTestLevel.tmx-3e0c95b8dffb5169ec680b67e311b483.scn" ]
-dest_md5="6ec8bd289e7bd456ba6d4d5ec3373643"
+dest_md5="639798b88f1203602a5a34943710c96f"
 
 [params]
 

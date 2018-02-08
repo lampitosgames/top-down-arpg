@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Camera/Camera.gd" type="Script" id=1]
+[ext_resource path="res://assets/debug-sprites/camera.png" type="Texture" id=2]
+
+[node name="Camera" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+followNodePath = null
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Visibility" ]
+
+
