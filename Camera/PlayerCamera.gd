@@ -7,8 +7,10 @@ func _ready():
 	pass
 
 func _process(delta):
-	position.x = lerp(playerPosition.x, cursorPosition.x, 0.2)
-	position.y = lerp(playerPosition.y, cursorPosition.y, 0.2)
+	position.x = lerp(playerPosition.x, cursorPosition.x, 0.3)
+	position.y = lerp(playerPosition.y, cursorPosition.y, 0.3)
+	
+	var offset = position - $Camera.position
 
 func _on_player_move(globalCoords):
 	playerPosition = globalCoords
