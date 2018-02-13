@@ -3,12 +3,13 @@
 [ext_resource path="res://Camera/PlayerCamera.gd" type="Script" id=1]
 [ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=2]
 
-[node name="PlayerCamera" type="Node2D"]
+[node name="PlayerCamera" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
 [node name="Camera" parent="." index="0" instance=ExtResource( 2 )]
 
+visible = false
 followNodePath = NodePath("..")
 lerpToPosition = true
 

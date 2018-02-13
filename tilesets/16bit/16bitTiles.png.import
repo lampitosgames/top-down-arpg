@@ -7,10 +7,10 @@ path="res://.import/16bitTiles.png-15afb2467e2dd1f96ccc597a79c4de8b.stex"
 [deps]
 
 source_file="res://tilesets/16bit/16bitTiles.png"
-source_md5="ce3299cd7ff5a273acbb0dc7e4fd2325"
+source_md5="c1881679372f20e4b19eeada0bd95e10"
 
 dest_files=[ "res://.import/16bitTiles.png-15afb2467e2dd1f96ccc597a79c4de8b.stex" ]
-dest_md5="14190f4cbe49f74df171153c9f1999f1"
+dest_md5="2f966744485cdb5f4c5faf52eb5631dd"
 
 [params]
 

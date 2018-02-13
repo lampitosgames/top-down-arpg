@@ -25,7 +25,6 @@ func _resize():
 		$CanvasLayer.transform = Transform2D(Vector2(1, 0), Vector2(0, 1), screenSize/2)
 
 func _process(delta):
-	print(position)
 	#If not lerping over time to the target position
 	if !lerpToPosition:
 		position = followNode.position
@@ -37,5 +36,8 @@ func _process(delta):
 			var vel = toTarget * lerpMag
 			position += vel * delta
 		viewportTransform.origin = -position + (screenSize/2)
+	
+	#Make sure GUI controls aren't affected by the camera
+	get_tree().call_group("GUICanvasLayers", "update_gui_transform", -followNode.position + (screenSize/2))
 	
 	get_viewport().canvas_transform = viewportTransform
