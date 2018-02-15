@@ -10,7 +10,7 @@ export var stoppedLinearDamp = 40
 export var dirForceMag = 400
 
 #Emitted signals
-signal player_update_move(dirNorm, dirPriority)
+signal player_update_move(dirNorm, dirPriority, keyboardInput)
 signal player_move(globalCoords)
 
 #Move direction
