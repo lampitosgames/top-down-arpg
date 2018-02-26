@@ -6,13 +6,86 @@
   <terrain name="Path" tile="0"/>
   <terrain name="Water" tile="185"/>
  </terraintypes>
- <tile id="0" terrain="0,0,0,0"/>
- <tile id="1" terrain="0,0,0,"/>
- <tile id="2" terrain="0,0,,0"/>
- <tile id="3" terrain="0,,0,0"/>
- <tile id="4" terrain=",0,0,0"/>
- <tile id="6" terrain=",0,0,"/>
- <tile id="23" terrain="0,,,0"/>
+ <tile id="0" terrain="0,0,0,0">
+  <objectgroup draworder="index">
+   <object id="3" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="1" terrain="0,0,0,">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="2" terrain="0,0,,0">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="3" terrain="0,,0,0">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="4" terrain=",0,0,0">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="5">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="6" terrain=",0,0,">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="7">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="22">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="23" terrain="0,,,0">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="24">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="25">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="26">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="27">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="28">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="29">
+  <objectgroup draworder="index">
+   <object id="1" type="navigation" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
  <tile id="44" terrain="0,,0,"/>
  <tile id="45" terrain="0,0,,"/>
  <tile id="46" terrain=",0,,0"/>

@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Camera/Camera.gd" type="Script" id=1]
+[ext_resource path="res://Nodes/Camera/Camera.gd" type="Script" id=1]
 [ext_resource path="res://assets/debug-sprites/camera.png" type="Texture" id=2]
 
-[node name="Camera" type="Node2D"]
+[node name="Camera" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
@@ -11,7 +11,7 @@ followNodePath = null
 lerpToPosition = false
 lerpMag = 5.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
+[node name="CameraCanvas" type="CanvasLayer" parent="." index="0"]
 
 layer = 20
 offset = Vector2( 0, 0 )
@@ -19,7 +19,7 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="Sprite" type="Sprite" parent="CanvasLayer" index="0"]
+[node name="CameraSprite" type="Sprite" parent="CameraCanvas" index="0"]
 
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Visibility" ]

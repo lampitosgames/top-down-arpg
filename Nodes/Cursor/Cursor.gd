@@ -3,8 +3,6 @@ extends Sprite
 export(float) var cursorRadius = 400.0
 export(float) var cursorSpeed = 40.0
 
-signal cursor_move(globalCoords)
-
 var isGamepadActive = false
 var aimingMode = false
 
@@ -17,12 +15,13 @@ var lastPlayerDir = Vector2(0, 1)
 func _ready():
 	Input.set_mouse_mode(1)
 	position = get_viewport_rect().position + get_viewport_rect().size/2
-	emit_signal("cursor_move", position)
+	print(position)
+	get_parent().emit_signal("cursor_move", position)
 
 func _input(ev):
 	if ev is InputEventMouseMotion:
 		position = get_global_mouse_position()
-		emit_signal("cursor_move", position)
+		get_parent().emit_signal("cursor_move", position)
 		if isGamepadActive:
 			visible = true
 			isGamepadActive = false
@@ -34,9 +33,8 @@ func _input(ev):
 		elif (ev.is_action_released("aim_cursor")):
 			aimingMode = false
 			visible = false
-			print(lastPlayerDir)
 			position = lastPlayerPos + lastPlayerDir * cursorRadius
-			emit_signal("cursor_move", position)
+			get_parent().emit_signal("cursor_move", position)
 	elif ev is InputEventJoypadMotion:
 		#Check gamepad active
 		if !isGamepadActive:
@@ -57,15 +55,15 @@ func _input(ev):
 		else:
 			cursorVel = Vector2(0,0)
 			position = lastPlayerPos + lastPlayerDir * cursorRadius
-			emit_signal("cursor_move", position)
+			get_parent().emit_signal("cursor_move", position)
 
 func _process(delta):
 	position += cursorVel * cursorSpeed
 	if (cursorVel.length_squared() != 0):
-		emit_signal("cursor_move", position)
+		get_parent().emit_signal("cursor_move", position)
 	
 	var viewportSize = get_viewport_rect().size
-	var viewportPos = -get_viewport().canvas_transform.origin	
+	var viewportPos = -get_viewport().canvas_transform.origin
 	position.x = clamp(position.x, viewportPos.x, viewportPos.x + viewportSize.x)
 	position.y = clamp(position.y, viewportPos.y, viewportPos.y + viewportSize.y)
 
@@ -74,7 +72,7 @@ func _on_player_move(globalCoords):
 	var positionDelta = globalCoords - lastPlayerPos
 	lastPlayerPos = globalCoords
 	position += positionDelta
-	emit_signal("cursor_move", position)
+	get_parent().emit_signal("cursor_move", position)
 
 
 func _on_player_update_direction(dirNorm, dirPriority, keyboardInput):

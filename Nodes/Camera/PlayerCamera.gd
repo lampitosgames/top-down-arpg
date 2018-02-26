@@ -12,8 +12,8 @@ func _process(delta):
 	
 	var offset = position - $Camera.position
 
-func _on_player_move(globalCoords):
+func _on_Player_player_move(globalCoords):
 	playerPosition = globalCoords
 
-func _on_cursor_move(globalCoords):
+func _on_Cursor_cursor_move(globalCoords):
 	cursorPosition = globalCoords

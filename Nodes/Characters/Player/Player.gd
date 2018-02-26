@@ -1,7 +1,6 @@
-extends RigidBody2D
+extends "res://Nodes/Characters/Character.gd"
 
-#Maximum player speed without modifiers
-export var playerSpeed = 300
+
 #Player mass.  Lower means less inertia
 export var playerMass = 10
 #When the player stops inputting directional movement, how much linear damping is applied
@@ -9,24 +8,26 @@ export var stoppedLinearDamp = 40
 #Force magnitude for movement.  Lower means more time to change
 export var dirForceMag = 400
 
+
 #Emitted signals
 signal player_update_move(dirNorm, dirPriority, keyboardInput)
 signal player_move(globalCoords)
+
 
 #Move direction
 var moveDir = Vector2(0, 0)
 #North=0, East=1, South=2, West=3
 var moveDirPriority = [false, false, false, false]
 
-#Start
-func _ready():
+
+func start():
+	.start()
 	set_process_input(true)
-	set_mass(playerMass)
-	set_friction(0)
+	mass = playerMass
+	friction = 0
 	emit_signal("player_move", position)
 
-#Update
-func _physics_process(delta):
+func move_character(dt):
 	#Clamp moveDir.  Controllers sometimes go over the given range of 0-1, so we need to cap the movement speeds
 	moveDir = moveDir.clamped(1)
 	#If player is stopped
@@ -42,7 +43,7 @@ func _physics_process(delta):
 		var moveForce = moveDir * dirForceMag * dirForceMag
 		set_applied_force(moveForce)
 		#Clamp player's linear velocity
-		set_linear_velocity(get_linear_velocity().clamped(playerSpeed * moveDir.length()))
+		set_linear_velocity(get_linear_velocity().clamped(maxSpeed * moveDir.length()))
 		emit_signal("player_move", position)
 
 #Handle input events.  Mostly used for movement, other controls are handled elsewhere

@@ -16,13 +16,13 @@ onready var viewportTransform = Transform2D(transform)
 func _ready():
 	get_tree().get_root().connect("size_changed",self,"_resize")
 	#Set visibility based on debug settings
-	visible = ProjectSettings.get_setting("debug/settings/display/display_camera_info")
+	$CameraCanvas/CameraSprite.visible = ProjectSettings.get_setting("debug/settings/display/camera_info")
 	_resize()
 
 func _resize():
 	screenSize = get_viewport_rect().size
-	if visible:
-		$CanvasLayer.transform = Transform2D(Vector2(1, 0), Vector2(0, 1), screenSize/2)
+	if $CameraCanvas/CameraSprite:
+		$CameraCanvas.transform = Transform2D(Vector2(1, 0), Vector2(0, 1), screenSize/2)
 
 func _process(delta):
 	#If not lerping over time to the target position

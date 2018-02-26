@@ -1,0 +1,23 @@
+[remap]
+
+importer="vnen.tiled_importer"
+type="PackedScene"
+path="res://.import/16BitTestLevel3.tmx-856cb64813956d674e88dd90dc91dd9b.scn"
+
+[deps]
+
+source_file="res://tilesets/16bit/16BitTestLevel3.tmx"
+source_md5="f40a9e319a1458f22a29895ba29a2ad6"
+
+dest_files=[ "res://.import/16BitTestLevel3.tmx-856cb64813956d674e88dd90dc91dd9b.scn" ]
+dest_md5="a1fb52e74df8e0e276accc90e3119d11"
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+uv_clip=true
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=false
+post_import_script=""

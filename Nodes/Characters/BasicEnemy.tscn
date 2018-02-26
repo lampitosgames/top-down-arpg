@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Nodes/Characters/AICharacter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Nodes/Characters/BasicEnemy.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 32, 32 )
+
+[node name="BasicEnemy" instance=ExtResource( 1 )]
+
+script = ExtResource( 2 )
+steering = Vector2( 0, 0 )
+playerPath = null
+
+[node name="Collider" parent="." index="0"]
+
+shape = SubResource( 1 )
+
+

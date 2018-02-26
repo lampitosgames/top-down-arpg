@@ -1,0 +1,62 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Nodes/Weapons/Sword.gd" type="Script" id=1]
+[ext_resource path="res://assets/temp-sword/sword1.png" type="Texture" id=2]
+[ext_resource path="res://assets/temp-sword/sword2.png" type="Texture" id=3]
+[ext_resource path="res://assets/temp-sword/sword3.png" type="Texture" id=4]
+[ext_resource path="res://assets/temp-sword/sword4.png" type="Texture" id=5]
+[ext_resource path="res://assets/temp-sword/sword5.png" type="Texture" id=6]
+[ext_resource path="res://assets/temp-sword/sword6.png" type="Texture" id=7]
+[ext_resource path="res://assets/temp-sword/sword7.png" type="Texture" id=8]
+[ext_resource path="res://assets/temp-sword/sword8.png" type="Texture" id=9]
+[ext_resource path="res://assets/temp-sword/sword9.png" type="Texture" id=10]
+[ext_resource path="res://assets/temp-sword/sword10.png" type="Texture" id=11]
+[ext_resource path="res://assets/temp-sword/sword11.png" type="Texture" id=12]
+[ext_resource path="res://assets/temp-sword/sword12.png" type="Texture" id=13]
+[ext_resource path="res://assets/temp-sword/sword13.png" type="Texture" id=14]
+[ext_resource path="res://assets/temp-sword/sword14.png" type="Texture" id=15]
+[ext_resource path="res://assets/temp-sword/sword15.png" type="Texture" id=16]
+
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "attack",
+"speed": 40.0
+} ]
+
+[node name="Sword" type="Area2D" groups=[
+"weapon",
+]]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+ownerPath = null
+weaponAttack = 10
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
+
+rotation = -0.785398
+build_mode = 0
+polygon = PoolVector2Array( -0.0671082, -0.0947723, 127.984, -31.6637, 117.596, -63.9416, 97.8574, -94.8348, 66.3335, -114.777, 31.803, -127.547 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
+
+rotation = -0.785398
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+animation = "attack"
+frame = 1
+offset = Vector2( 128, -128 )
+_sections_unfolded = [ "Transform" ]
+
+
