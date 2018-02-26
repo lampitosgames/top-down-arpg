@@ -15,7 +15,6 @@ var lastPlayerDir = Vector2(0, 1)
 func _ready():
 	Input.set_mouse_mode(1)
 	position = get_viewport_rect().position + get_viewport_rect().size/2
-	print(position)
 	get_parent().emit_signal("cursor_move", position)
 
 func _input(ev):

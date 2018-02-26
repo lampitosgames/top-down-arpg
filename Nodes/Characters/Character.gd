@@ -13,7 +13,6 @@ export(Vector2) var steering = Vector2(0, 0)
 #Emitted signals
 signal character_move(nodePath, globalCoords)
 
-
 #This character's path
 onready var thisCharacter = get_path()
 #Debug display
@@ -46,7 +45,12 @@ func _draw():
 func move_character(dt):
 	pass
 
+func deal_damage_to(otherNode, weaponDamage):
+	if not otherNode.is_in_group("damageable"):
+		return
+	otherNode.apply_damage(Meta.get_attack_data(weaponDamage))
+
 #Deal damage to this character
 func apply_damage(damageObj):
-	print(thisCharacter + " takes " + damageObj.damage + " damage!")
+	print("takes damage!")
 	health -= damageObj.damage

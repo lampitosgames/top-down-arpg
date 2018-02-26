@@ -1,23 +1,28 @@
 extends "res://Nodes/Characters/Character.gd"
 
 
+#Emitted signals
+signal player_update_move(dirNorm, dirPriority, keyboardInput)
+signal player_move(globalCoords)
+
+
 #Player mass.  Lower means less inertia
 export var playerMass = 10
 #When the player stops inputting directional movement, how much linear damping is applied
 export var stoppedLinearDamp = 40
 #Force magnitude for movement.  Lower means more time to change
 export var dirForceMag = 400
-
-
-#Emitted signals
-signal player_update_move(dirNorm, dirPriority, keyboardInput)
-signal player_move(globalCoords)
+export(NodePath) var weaponPath
 
 
 #Move direction
 var moveDir = Vector2(0, 0)
 #North=0, East=1, South=2, West=3
 var moveDirPriority = [false, false, false, false]
+#cursor position
+var cursorPos = Vector2(0, 0)
+#Player's currently equipped weapon
+var equippedWeapon = null
 
 
 func _init():
@@ -25,10 +30,13 @@ func _init():
 
 func start():
 	.start()
+	connect("player_update_move", $AnimatedSprite, "_player_moved")
 	set_process_input(true)
 	mass = playerMass
 	friction = 0
 	emit_signal("player_move", position)
+	if (has_node(weaponPath)):
+		equippedWeapon = get_node(weaponPath)
 
 func move_character(dt):
 	#Clamp moveDir.  Controllers sometimes go over the given range of 0-1, so we need to cap the movement speeds
@@ -55,13 +63,33 @@ func _input(ev):
 	if ev is InputEventKey:
 		keyboard_input(ev)
 		emit_signal("player_update_move", moveDir, moveDirPriority, true)
+	if ev is InputEventMouse:
+		keyboard_input(ev)
 	#Gamepad input handling (for key presses)
 	if ev is InputEventJoypadButton:
-		print("gamepad button")
+		if ev.is_action_pressed("player_attack"):
+			attack()
 	#Gamepad input handling for joystick movement
 	if ev is InputEventJoypadMotion:
 		gamepad_input(ev)
 		emit_signal("player_update_move", moveDir, moveDirPriority, false)
+
+func attack():
+	if not equippedWeapon:
+		return
+	
+	#Get a unit vector in the direction of the cursor
+	var attackDir = position - cursorPos
+	attackDir = attackDir.normalized()
+	var attackTangent = attackDir.tangent().normalized()
+	
+	equippedWeapon.transform = Transform2D(attackTangent, attackDir, attackDir * -30)
+	
+	equippedWeapon.attack()
+
+#Track cursor position
+func _on_Cursor_cursor_move(globalCoords):
+	cursorPos = globalCoords
 
 ####################################################
 #                                                  #
@@ -155,6 +183,9 @@ func keyboard_input(ev):
 			elif (moveDir.y > 0):
 				moveDirPriority[2] = true
 	
+	if (ev.is_action_pressed("player_attack")):
+		attack()
+	
 	#Normalize the movement direction
 	moveDir = moveDir.normalized()
 
@@ -165,6 +196,9 @@ func gamepad_input(ev):
 	#Horizontal joystick movement
 	if (ev.is_action("player_move_left") || ev.is_action("player_move_right")):
 		moveDir = Vector2(ev.axis_value, moveDir.y)
+	
+	if (ev.is_action_pressed("player_attack")):
+		attack()
 	
 	#If the vector is tiny, set it to zero
 	if (moveDir.length_squared() < 0.01):
