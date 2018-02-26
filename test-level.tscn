@@ -29,7 +29,6 @@ steering = Vector2( 0, 0 )
 [node name="BasicEnemy" parent="." index="4" instance=ExtResource( 5 )]
 
 position = Vector2( 944, 672 )
-playerPath = NodePath("../Player")
 
 [connection signal="cursor_move" from="Cursor" to="PlayerCamera" method="_on_Cursor_cursor_move"]
 

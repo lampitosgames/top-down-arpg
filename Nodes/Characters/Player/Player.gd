@@ -20,6 +20,9 @@ var moveDir = Vector2(0, 0)
 var moveDirPriority = [false, false, false, false]
 
 
+func _init():
+	GameState.Player = self
+
 func start():
 	.start()
 	set_process_input(true)

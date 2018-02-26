@@ -2,7 +2,6 @@ extends Area2D
 
 signal attack_finished
 
-export(NodePath) var ownerPath
 export(int) var weaponAttack = 10
 
 onready var animationPlayer = $AnimatedSprite
@@ -10,8 +9,12 @@ onready var animationPlayer = $AnimatedSprite
 enum ATTACK_STATE {ATTACK, NONE}
 var state = NONE
 
+var ownerNode
+
 func _ready():
 	set_physics_process(false)
+	ownerNode = get_parent()
+	ownerNode.equippedWeapon = self
 
 func attack():
 	_set_state(ATTACK)
@@ -28,7 +31,7 @@ func _physics_process(delta):
 		if _is_owner(body):
 			return
 		
-		body.apply_damage(weaponAttack)
+		ownerNode.deal_damage_to(body)
 	set_physics_process(false)
 
 func _set_state(newState):
@@ -36,8 +39,12 @@ func _set_state(newState):
 	match newState:
 		ATTACK:
 			set_physics_process(true)
+			animationPlayer.play("attack")
 		NONE:
 			set_physics_process(false)
 
 func _is_owner(node):
-	return node.get_path() == ownerPath
+	return node == get_parent()
+
+func _on_AnimatedSprite_animation_finished():
+	_set_state(NONE)
