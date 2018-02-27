@@ -3,19 +3,22 @@ extends Area2D
 signal attack_finished
 
 export(int) var weaponAttack = 10
-
-onready var animatedSprite = $AnimatedSprite
+export(float) var attackLength = 0.2
 
 enum ATTACK_STATE {ATTACK, NONE}
 var state = NONE
 
 onready var ownerNode = get_parent()
+onready var animatedSprite = $AnimatedSprite
+onready var attackFrameCount = $AnimatedSprite.frames.get_frame_count("attack")
 
 func _ready():
 	visible = false
 	set_physics_process(false)
+	$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
 
 func attack():
+	animatedSprite.frames.set_animation_speed("attack", attackFrameCount / attackLength)
 	animatedSprite.play("attack")
 	visible = true
 	_set_state(ATTACK)

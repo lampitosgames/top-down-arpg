@@ -4,15 +4,18 @@ extends "res://Nodes/Characters/Character.gd"
 #Emitted signals
 signal player_update_move(dirNorm, dirPriority, keyboardInput)
 signal player_move(globalCoords)
+signal player_attack(dir)
+signal player_attack_finished()
 
-
-#Player mass.  Lower means less inertia
-export var playerMass = 10
 #When the player stops inputting directional movement, how much linear damping is applied
 export var stoppedLinearDamp = 40
 #Force magnitude for movement.  Lower means more time to change
 export var dirForceMag = 400
+
+#Path to the equipped weapon
 export(NodePath) var weaponPath
+#When the player attacks, how much linear damping is applied
+export var attackingLinearDamp = 30
 
 
 #Move direction
@@ -24,23 +27,36 @@ var cursorPos = Vector2(0, 0)
 #Player's currently equipped weapon
 var equippedWeapon = null
 
+#Player state variables
+enum playerState {DEFAULT, ATTACKING, DASHING}
+var currentState = playerState.DEFAULT
+
 
 func _init():
 	GameState.Player = self
 
 func start():
 	.start()
-	connect("player_update_move", $AnimatedSprite, "_player_moved")
 	set_process_input(true)
-	mass = playerMass
 	friction = 0
-	emit_signal("player_move", position)
+	
+	connect("player_update_move", $AnimatedSprite, "_player_moved")
+	connect("player_attack", $AnimatedSprite, "_player_attack")
+	connect("player_attack_finished", $AnimatedSprite, "_player_attack_finished")
 	if (has_node(weaponPath)):
 		equippedWeapon = get_node(weaponPath)
+		equippedWeapon.connect("attack_finished", self, "_on_Weapon_attack_finished")
+	emit_signal("player_move", position)
 
 func move_character(dt):
 	#Clamp moveDir.  Controllers sometimes go over the given range of 0-1, so we need to cap the movement speeds
 	moveDir = moveDir.clamped(1)
+	
+	#If the player is locked into an animation
+	if (currentState != playerState.DEFAULT):
+		emit_signal("player_move", position)
+		return
+	
 	#If player is stopped
 	if (moveDir.length_squared() == 0):
 		set_linear_damp(stoppedLinearDamp)
@@ -75,17 +91,33 @@ func _input(ev):
 		emit_signal("player_update_move", moveDir, moveDirPriority, false)
 
 func attack():
-	if not equippedWeapon:
+	if not equippedWeapon || currentState != playerState.DEFAULT:
 		return
 	
-	#Get a unit vector in the direction of the cursor
+	#Get a unit vector in the direction of the cursor for the attack
 	var attackDir = position - cursorPos
 	attackDir = attackDir.normalized()
+	#Get tangent vector to the attack normal so we can build a rotation matrix
 	var attackTangent = attackDir.tangent().normalized()
-	
+	#Change the equipped weapon's transform to point in the right direction
 	equippedWeapon.transform = Transform2D(attackTangent, attackDir, attackDir * -30)
-	
+	#Call the weapon's attack method.  When it finishes, it will emit a signal
 	equippedWeapon.attack()
+	
+	#Set the player state to attacking
+	currentState = playerState.ATTACKING
+	#Reset the player's velocity
+	linear_velocity = Vector2(0, 0)
+	set_applied_force(Vector2(0,0))
+	set_linear_damp(attackingLinearDamp)
+	apply_impulse(Vector2(0, 0), attackDir * -2000 * mass)
+	
+	emit_signal("player_attack", -attackDir)
+
+func _on_Weapon_attack_finished():
+	currentState = playerState.DEFAULT
+	emit_signal("player_update_move", moveDir, moveDirPriority, false)
+	emit_signal("player_attack_finished")
 
 #Track cursor position
 func _on_Cursor_cursor_move(globalCoords):

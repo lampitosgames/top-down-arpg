@@ -6,8 +6,39 @@ export var southRunSpeed = 16
 export var westRunSpeed = 14
 
 var lastMoveDir = 2
+var attacking = false
 
-func _player_moved(dir, priority, keyboardInput):	
+func _player_attack(dir):
+	#This is temporary code until we get attack animations
+	attacking = true
+	
+	#check for north/south animation
+	if (abs(dir.x) < abs(dir.y)):
+		if (dir.y < 0):
+			play("run-north")
+			frames.set_animation_speed("run-north", northRunSpeed)
+			offset = Vector2(0, 0)
+		elif (dir.y > 0):
+			play("run-south")
+			frames.set_animation_speed("run-south", southRunSpeed)
+			offset = Vector2(0, 0)
+	#check for east/west animation
+	elif (abs(dir.y) < abs(dir.x)):
+		if (dir.x < 0):
+			play("run-west")
+			frames.set_animation_speed("run-west", westRunSpeed)
+			offset = Vector2(20, 0)
+		elif (dir.x > 0):
+			play("run-east")
+			frames.set_animation_speed("run-east", eastRunSpeed)
+			offset = Vector2(-20, 0)
+
+func _player_attack_finished():
+	attacking = false
+
+func _player_moved(dir, priority, keyboardInput):
+	if (attacking):
+		return
 	#check for stopped
 	if (dir.length_squared() == 0):
 		if (lastMoveDir == 0):
